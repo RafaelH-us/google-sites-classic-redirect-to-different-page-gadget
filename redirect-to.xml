@@ -1,1 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?><Module> <ModulePrefs title="Redirect to Page" width="10" height="10" title_url="https://github.com/RafaelH-us" author="Rafael Hernandez" author_email="rafaelh@rafaelh.us" scrolling="no"></ModulePrefs> <UserPref name="url" display_name="URL to redirect to (?noredirect=1)" required="true" default_value="http://"/> <UserPref name="deviceCheck" display_name="Redirect if" default_value="Yes" datatype="enum"> <EnumValue value="Mobile or Tablet not Desktop"/> <EnumValue value="Desktop not Mobile or Tablet"/> <EnumValue value="All"/></UserPref> <Content type="html"> <![CDATA[ <style> html, body { background-color: transparent; } </style> <script type="text/javascript"> var prefs = new gadgets.Prefs(); var Xurl = prefs.getString("url"); var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())); function Initialize() { var match = new RegExp(encodeURIComponent("noredirect=1")).test(window.location.search.substr(1)); var deviceCheck = "__UP_deviceCheck__"; if(!match) { if(mobile && deviceCheck == "Mobile or Tablet not Desktop") { parent.location = Xurl; } if (!mobile && deviceCheck == "Desktop not Mobile or Tablet") { parent.location = Xurl; } if (deviceCheck == "All") { parent.location = Xurl; } else { return false; } } } gadgets.util.registerOnLoadHandler(Initialize); </script> ]]> </Content></Module>
+<?xml version="1.0" encoding="UTF-8"?>
+  <Module> 
+    <ModulePrefs title="Redirect to Page" width="10" height="10" title_url="https://github.com/RafaelH-us" author="Rafael Hernandez" author_email="rafaelh@rafaelh.us" scrolling="no">
+  </ModulePrefs> 
+  <UserPref name="url" display_name="URL to redirect to (?noredirect=1)" required="true" default_value="http://"/> 
+  <UserPref name="deviceCheck" display_name="Redirect if" default_value="Yes" datatype="enum"> 
+    <EnumValue value="Mobile or Tablet not Desktop"/> <EnumValue value="Desktop not Mobile or Tablet"/> 
+    <EnumValue value="All"/></UserPref> 
+    <Content type="html"> 
+      <![CDATA[ 
+        <style> 
+          html, body { background-color: transparent; } 
+        </style> 
+        <script type="text/javascript"> 
+          var prefs = new gadgets.Prefs(); 
+          var Xurl = prefs.getString("url"); 
+          var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())); 
+          
+          function Initialize() { 
+            var match = new RegExp(encodeURIComponent("noredirect=1")).test(window.location.search.substr(1)); 
+            var deviceCheck = "__UP_deviceCheck__"; 
+            
+            if(!match) { 
+              if(mobile && deviceCheck == "Mobile or Tablet not Desktop") { 
+                parent.location = Xurl; 
+              } 
+              if (!mobile && deviceCheck == "Desktop not Mobile or Tablet") { 
+                parent.location = Xurl; 
+              } 
+              if (deviceCheck == "All") { 
+                parent.location = Xurl; 
+              } else { 
+                return false; 
+              } 
+            } 
+          } 
+          gadgets.util.registerOnLoadHandler(Initialize); 
+        </script> 
+      ]]> 
+    </Content>
+  </Module>
